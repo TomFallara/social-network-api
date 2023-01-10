@@ -34,7 +34,7 @@ module.exports = {
     createUser(req, res) {
         User.create(req.body)
         .then((user) => res.json(user))
-        .catch((err) => res.status((500).json(err)));
+        .catch((err) => res.status(500).json(err));
     },
 
     //update user
@@ -64,7 +64,7 @@ module.exports = {
         : Thought.deleteMany({ _id: { $in: user.thoughts} })
         )
         .then (() => res.json({ message: 'User and thoughts succesfully deleted'}))
-        .cath((err) => {
+        .catch((err) => {
             console.log(err);
             res.status(500).json(err)
         });
@@ -75,13 +75,13 @@ module.exports = {
         console.log('You are adding a friend');
         console.log(req.body);
         User.findOneAndUpdate(
-            { __id: req.params.userId},
+            { _id: req.params.userId},
             { $addToSet: { friends: req.params.userId } },
             { runValidators: true, new: true},
             )
         .then((user) => 
         User.findOneAndUpdate(
-            { __id: req.params.userId},
+            { _id: req.params.userId},
             { $addToSet: { friends: req.params.userId } },
             { runValidators: true, new: true},
             )
@@ -97,13 +97,13 @@ module.exports = {
         //Remove friend from a user
         removeFriend(req, res){
             User.findOneAndUpdate(
-                { __id: req.params.userId},
+                { _id: req.params.userId},
                 { $pull: { friends: req.params.userId } },
                 { runValidators: true, new: true},
             )
             .then(() =>
             User.findOneAndUpdate(
-                { __id: req.params.userId},
+                { _id: req.params.userId},
                 { $pull: { friends: req.params.userId } },
                 { runValidators: true, new: true},
                 )

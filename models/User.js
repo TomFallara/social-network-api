@@ -1,5 +1,5 @@
 
-const {Schema, mongoose, model, Types} = require('mongoose');
+const {Schema, mongoose, model} = require('mongoose');
 const validator = require('validator');
 
 // Construct a new instance of the schema class for user
