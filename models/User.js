@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+const {Schema, mongoose, model, Types} = require('mongoose');
 const validator = require('validator');
 
 // Construct a new instance of the schema class for user
@@ -42,5 +42,6 @@ userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 
+const User = model('user', userSchema)
 
 module.exports = User;
